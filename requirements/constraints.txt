@@ -97,3 +97,6 @@ pymongo<3.11
 
 # sympy latest version causing test failures.
 sympy==1.6.2
+
+# aiohttp 3.7.3 has requirement chardet<4.0
+chardet<4.0

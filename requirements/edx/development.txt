@@ -40,7 +40,7 @@ bridgekeeper==0.9         # via -r requirements/edx/testing.txt
 celery==4.4.7             # via -c requirements/edx/../constraints.txt, -r requirements/edx/testing.txt, django-celery-results, django-user-tasks, edx-celeryutils, edx-enterprise, event-tracking
 certifi==2020.12.5        # via -r requirements/edx/testing.txt, elasticsearch, requests
 cffi==1.14.4              # via -r requirements/edx/testing.txt, cryptography
-chardet==4.0.0            # via -r requirements/edx/testing.txt, aiohttp, pysrt, requests
+chardet==3.0.4            # via -r requirements/edx/testing.txt, aiohttp, pysrt, requests
 chem==1.2.0               # via -r requirements/edx/testing.txt
 click-log==0.3.2          # via -r requirements/edx/testing.txt, edx-lint
 click==7.1.2              # via -r requirements/edx/development.in, -r requirements/edx/pip-tools.txt, -r requirements/edx/testing.txt, click-log, code-annotations, edx-lint, nltk, pip-tools, user-util

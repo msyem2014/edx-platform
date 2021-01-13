@@ -69,7 +69,7 @@ class CourseMode(models.Model):
     # Historical note: We used to allow users to choose from several prices, but later
     # switched to using a single price.  Although this field is called `min_price`, it is
     # really just the price of the course.
-    min_price = models.IntegerField(default=0, verbose_name=_("Price"))
+    min_price = models.DecimalField(default=0.00, verbose_name=_("Price"), max_digits=30, decimal_places=2)
 
     # the currency these prices are in, using lower case ISO currency codes
     currency = models.CharField(default=u"usd", max_length=8)
@@ -207,7 +207,7 @@ class CourseMode(models.Model):
             )
 
         mode_config = settings.COURSE_ENROLLMENT_MODES.get(self.mode_slug, {})
-        min_price_for_mode = mode_config.get('min_price', 0)
+        min_price_for_mode = mode_config.get('min_price', 0.00)
         if int(self.min_price) < min_price_for_mode:
             mode_display_name = mode_config.get('display_name', self.mode_slug)
             raise ValidationError(
@@ -328,7 +328,7 @@ class CourseMode(models.Model):
         """
         found_course_modes = cls.objects.filter(
             Q(course_id=course_id) &
-            Q(min_price__gt=0) &
+            Q(min_price__gt=0.00) &
             (
                 Q(_expiration_datetime__isnull=True) |
                 Q(_expiration_datetime__gte=now())
@@ -506,7 +506,7 @@ class CourseMode(models.Model):
         for mode in modes:
             if (mode.currency.lower() == currency.lower()) and (mode.slug == 'verified'):
                 return mode.min_price
-        return 0
+        return 0.00
 
     @classmethod
     def has_verified_mode(cls, course_mode_dict):
@@ -670,7 +670,7 @@ class CourseMode(models.Model):
 
         """
         for mode in cls.modes_for_course(course_id):
-            if mode.min_price > 0 or mode.suggested_prices != '':
+            if mode.min_price > 0.00 or mode.suggested_prices != '':
                 return True
         return False
 
@@ -754,7 +754,7 @@ class CourseMode(models.Model):
         # White-label uses course mode honor with a price
         # to indicate that the course is behind a paywall.
         if cls.HONOR in modes_dict and len(modes_dict) == 1:
-            if modes_dict["honor"].min_price > 0 or modes_dict["honor"].suggested_prices != '':
+            if modes_dict["honor"].min_price > 0.00 or modes_dict["honor"].suggested_prices != '':
                 return True
         return False
 

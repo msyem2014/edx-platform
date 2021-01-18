@@ -24,7 +24,7 @@ from openedx.core.djangoapps.user_api.accounts.utils import (
 )
 from openedx.core.djangoapps.user_api.helpers import FormDescription
 from openedx.core.djangoapps.user_authn.cookies import are_logged_in_cookies_set
-from openedx.core.djangoapps.user_authn.utils import should_redirect_to_logistration_mircrofrontend
+from openedx.core.djangoapps.user_authn.utils import should_redirect_to_authn_mircrofrontend
 from openedx.core.djangoapps.user_authn.views.password_reset import get_password_reset_form
 from openedx.core.djangoapps.user_authn.views.registration_form import RegistrationFormFactory
 from openedx.core.djangoapps.user_authn.views.utils import third_party_auth_context
@@ -184,14 +184,14 @@ def login_and_registration_form(request, initial_mode="login"):
         except (KeyError, ValueError, IndexError) as ex:
             log.exception(u"Unknown tpa_hint provider: %s", ex)
 
-    # Redirect to logistration MFE if it is enabled
-    if should_redirect_to_logistration_mircrofrontend():
+    # Redirect to authn MFE if it is enabled
+    if should_redirect_to_authn_mircrofrontend():
         query_params = request.GET.urlencode()
         url_path = '/{}{}'.format(
             initial_mode,
             '?' + query_params if query_params else ''
         )
-        return redirect(settings.LOGISTRATION_MICROFRONTEND_URL + url_path)
+        return redirect(settings.AUTHN_MICROFRONTEND_URL + url_path)
 
     # Account activation message
     account_activation_messages = [

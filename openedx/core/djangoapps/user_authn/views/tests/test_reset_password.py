@@ -354,7 +354,7 @@ class ResetPasswordTests(EventTestMixin, CacheIsolationTestCase):
                 reset_msg = reset_msg.format(site_name)
 
                 self.assertIn(reset_msg, msg)
-                self.assertIn(settings.LOGISTRATION_MICROFRONTEND_URL, msg)
+                self.assertIn(settings.AUTHN_MICROFRONTEND_URL, msg)
 
                 sign_off = u"The {} Team".format(platform_name)
                 self.assertIn(sign_off, msg)

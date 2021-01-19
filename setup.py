@@ -80,6 +80,7 @@ setup(
             "credentials = openedx.core.djangoapps.credentials.apps:CredentialsConfig",
             "content_libraries = openedx.core.djangoapps.content_libraries.apps:ContentLibrariesConfig",
             "discussion = lms.djangoapps.discussion.apps:DiscussionConfig",
+            "survey = lms.djangoapps.survey.apps:SurveyConfig",
             "grades = lms.djangoapps.grades.apps:GradesConfig",
             "plugins = openedx.core.djangoapps.plugins.apps:PluginsConfig",
             "theming = openedx.core.djangoapps.theming.apps:ThemingConfig",
@@ -101,6 +102,11 @@ setup(
             # consolidate the multiple discussions-related Django apps and
             # either put them in the openedx/ dir, or in another repo entirely.
             "discussion = lms.djangoapps.discussion.apps:DiscussionConfig",
+            # Likewise, the LMS Survey app shouldn't be needed in Studio,
+            # but for historical reasons, we need 'survey' to be a Studio
+            # entrypoint so that it is listed as an available advanced
+            # module.
+            "survey = lms.djangoapps.survey.apps:SurveyConfig",
             "olx_rest_api = openedx.core.djangoapps.olx_rest_api.apps:OlxRestApiAppConfig",
             "plugins = openedx.core.djangoapps.plugins.apps:PluginsConfig",
             "theming = openedx.core.djangoapps.theming.apps:ThemingConfig",

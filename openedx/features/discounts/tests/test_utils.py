@@ -36,7 +36,7 @@ class TestStrikeoutPrice(TestCase):
         assert six.text_type(content) == u"<span class='price'>$100</span>"
         assert not has_discount
 
-    @ddt.data((15, 100, "$100", "$85",), (50, 50, "$50", "$25"), (10, 99, "$99", "$89.10"))
+    @ddt.data((15, 100, "$100", "$85",), (50, 50, "$50", "$25"), (10, 99, "$99", "$89.10"), (15, 100.00, "$100.00", "$85.00",), (50, 50.00, "$50.00", "$25.00"), (10, 99.00, "$99.00", "$89.10"))
     @ddt.unpack
     def test_eligible_eligible(self, discount_percentage, base_price, formatted_base_price, final_price):
         with patch.multiple(
